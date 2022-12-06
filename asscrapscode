@@ -1,0 +1,79 @@
+import java.util.Random;
+import java.util.Scanner;
+
+public class labString {
+
+        public static void main(String[] args) {
+
+            Scanner in = new Scanner(System.in);
+            Random rnd = new Random();
+            int die1;
+            int die2;
+            int crapsRoll;
+            int point;
+            int pointRoll1;
+            int pointRoll2;
+            int pointSum;
+            String trash = "";
+            String userYN = "";
+            boolean playAgain = true;
+            boolean PointSumRolls = false;
+            do {
+                die1 = rnd.nextInt(6) + 1;
+                die2 = rnd.nextInt(6) + 1;
+                crapsRoll = die1 + die2;
+                System.out.println("Die 1 roll is: " + die1);
+                System.out.println("Die 2 roll is: " + die2);
+
+                if (crapsRoll == 2 || crapsRoll == 3 || crapsRoll == 12) {
+                    System.out.println("Craps!: " + crapsRoll);
+                    System.out.println("You lose!");
+                } else if (crapsRoll == 7 || crapsRoll == 11) {
+                    System.out.println("Natural is: " + crapsRoll);
+                    System.out.println("You win!");
+                } else {
+                    do {
+                        point = crapsRoll;
+                        pointRoll1 = rnd.nextInt(6) + 1;
+                        pointRoll2 = rnd.nextInt(6) + 1;
+                        pointSum = pointRoll1 + pointRoll2;
+                        System.out.println("Point is: " + point);
+                        System.out.println("Roll again to try to get the point sum");
+                        System.out.println("Point 1 roll is: " + pointRoll1);
+                        System.out.println("Point 2 roll is: " + pointRoll2);
+
+                        if (pointSum == 7) {
+                            PointSumRolls = true;
+                            System.out.println("You lose!");
+                            System.out.println("You rolled: " + pointSum);
+                        } else if (pointSum == point) {
+                            System.out.println("You hit the point sum, you win!");
+                            System.out.println("You rolled: " + pointSum);
+                            PointSumRolls = true;
+                        } else {
+                            System.out.println("Roll again to try to match the point sum.");
+                            System.out.println("You have rolled: " + pointSum);
+                            PointSumRolls = false;
+                        }
+                    } while (!PointSumRolls);
+                }
+                System.out.print("Would you like to continue playing? (Y/N): ");
+                userYN = in.nextLine();
+                if (userYN.equalsIgnoreCase("y")) {
+                    playAgain = true;
+                }
+                else if (userYN.equalsIgnoreCase("n")) {
+                    playAgain = false;
+                    System.out.println("Thanks for playing!");
+                    System.exit(0);
+                }
+                else {
+                    trash = in.nextLine();
+                    System.out.println("Error! You have entered an invalid input: " + trash + " Please run the program again and try again");
+                }
+            } while (playAgain = true);
+
+        }
+
+
+    }
